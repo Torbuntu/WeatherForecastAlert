@@ -115,35 +115,42 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 
-	// Check each alert condition.
+	// Check each alert condition. If it exists, alert the user.
 	public void checkAlerts(JSONObject object){
-		String advisory = "";
+		String advisory;
 		try {
 			if (object.getString("text").contains("Rain")) {
-				advisory += "Rain advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				advisory = "Rain advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				notifyAlert(advisory, notificationID);
+				notificationID++;
 			}
 			if(object.getString("text").contains("Thunderstorms")){
-				advisory += "Thunderstorm advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				advisory = "Thunderstorm advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				notifyAlert(advisory, notificationID);
+				notificationID++;
 			}
 			if(object.getString("text").contains("Snow")){
-				advisory += "Snow advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				advisory = "Snow advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				notifyAlert(advisory, notificationID);
+				notificationID++;
 			}
 			if(object.getString("text").contains("Ice")){
-				advisory += "Ice advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				advisory = "Ice advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				notifyAlert(advisory, notificationID);
+				notificationID++;
 			}
 			if(Integer.parseInt(object.getString("high")) > 85 ){
-				advisory += "Heat advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				advisory = "Heat advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				notifyAlert(advisory, notificationID);
+				notificationID++;
 			}
 			if(Integer.parseInt(object.getString("low")) < 32){
-				advisory += "Freezing advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				advisory = "Freezing advisory for " + object.getString("day") +", "+object.getString("date") + ". \n";
+				notifyAlert(advisory, notificationID);
+				notificationID++;
 			}
 		}catch (JSONException e){
 			e.printStackTrace();
-		}
-
-		if(advisory.length() > 1){
-			notifyAlert(advisory, notificationID);
-			notificationID += 1;
 		}
 	}
 
